@@ -1,4 +1,4 @@
-package com.test.econrich;
+package com.assignment.econrich;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
