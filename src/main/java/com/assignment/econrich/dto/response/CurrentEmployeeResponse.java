@@ -1,9 +1,7 @@
 package com.assignment.econrich.dto.response;
 
-import com.assignment.econrich.domain.Department;
 import com.assignment.econrich.domain.Employee;
 import com.assignment.econrich.domain.Job;
-import com.assignment.econrich.dto.DepartmentDto;
 import com.assignment.econrich.dto.EmployeeDto;
 import com.assignment.econrich.dto.JobDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,9 +28,9 @@ public class CurrentEmployeeResponse {
     private final BigDecimal salary;
     private final BigDecimal commission_pct;
     private final EmployeeDto manager_info;
-    private final DepartmentDto department_Info;
+    private final Long department_id;
 
-    public CurrentEmployeeResponse(final Employee employee, final Job job, final Employee manager, final Department department) {
+    public CurrentEmployeeResponse(final Employee employee, final Job job, final Employee manager) {
         this.employee_id = employee.getId();
         this.first_name = employee.getFirstName();
         this.last_name = employee.getLastName();
@@ -43,6 +41,6 @@ public class CurrentEmployeeResponse {
         this.salary = employee.getSalary();
         this.commission_pct = employee.getCommissionPct();
         this.manager_info = new EmployeeDto(manager);
-        this.department_Info = new DepartmentDto(department);
+        this.department_id = employee.getDepartmentId();
     }
 }

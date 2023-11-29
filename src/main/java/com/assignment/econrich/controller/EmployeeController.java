@@ -27,7 +27,6 @@ public class EmployeeController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<CurrentEmployeeResponse> searchCurrentEmployee(@PathVariable Long id) {
-
         CurrentEmployeeResponse response = employeeService.searchCurrentEmployee(id);
 
         return ResponseEntity.ok(response);
@@ -35,7 +34,6 @@ public class EmployeeController {
 
     @GetMapping("/{id}/history")
     public ResponseEntity<HistoryEmployeeResponse> searchHistoryEmployee(@PathVariable Long id) {
-
         HistoryEmployeeResponse response = employeeService.searchHistoryEmployee(id);
 
         return ResponseEntity.ok(response);

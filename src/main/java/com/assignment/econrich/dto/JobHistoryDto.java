@@ -11,17 +11,17 @@ import java.time.LocalDateTime;
 public class JobHistoryDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDateTime start_date;
+    private final LocalDateTime start_date;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDateTime end_date;
-    private String job_id;
-    private DepartmentDto department_info;
+    private final LocalDateTime end_date;
+    private final String job_id;
+    private final Long department_id;
 
-    public JobHistoryDto(final JobHistory jobHistory, final Department department) {
+    public JobHistoryDto(final JobHistory jobHistory) {
         this.start_date = jobHistory.getStartDate();
         this.end_date = jobHistory.getEndDate();
         this.job_id = jobHistory.getJobId();
-        this.department_info = new DepartmentDto(department);
+        this.department_id = jobHistory.getDepartmentId();
     }
 }
