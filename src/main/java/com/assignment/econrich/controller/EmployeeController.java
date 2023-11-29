@@ -1,6 +1,7 @@
 package com.assignment.econrich.controller;
 
 import com.assignment.econrich.dto.response.CurrentEmployeeResponse;
+import com.assignment.econrich.dto.response.HistoryEmployeeResponse;
 import com.assignment.econrich.service.EmployeeService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +28,15 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<CurrentEmployeeResponse> searchCurrentEmployee(@PathVariable Long id) {
 
-        CurrentEmployeeResponse response = employeeService.searchEmployee(id);
+        CurrentEmployeeResponse response = employeeService.searchCurrentEmployee(id);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}/history")
+    public ResponseEntity<HistoryEmployeeResponse> searchHistoryEmployee(@PathVariable Long id) {
+
+        HistoryEmployeeResponse response = employeeService.searchHistoryEmployee(id);
 
         return ResponseEntity.ok(response);
     }
