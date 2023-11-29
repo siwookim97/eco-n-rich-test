@@ -8,7 +8,6 @@ import com.assignment.econrich.domain.repository.EmployeeRepository;
 import com.assignment.econrich.domain.Employee;
 import com.assignment.econrich.domain.repository.JobHistoryRepository;
 import com.assignment.econrich.domain.repository.JobRepository;
-import com.assignment.econrich.domain.uk.JobHistoryUK;
 import com.assignment.econrich.dto.JobHistoryDto;
 import com.assignment.econrich.dto.response.CurrentEmployeeResponse;
 import com.assignment.econrich.dto.response.HistoryEmployeeResponse;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,11 +38,15 @@ public class EmployeeService {
 
     public HistoryEmployeeResponse searchHistoryEmployee(Long id) {
         List<JobHistory> findJobHistoyList = jobHistoryRepository.findByEmployeeId(id);
-        HistoryEmployeeResponse historyEmployeeResponse = new HistoryEmployeeResponse();
+        Employee findEmployee = employeeRepository.findById(id).get();
+        HistoryEmployeeResponse historyEmployeeResponse = new HistoryEmployeeResponse(findEmployee);
 
-        historyEmployeeResponse.setJob_history_list(findJobHistoyList.stream()
-                .map(JobHistoryDto::new)
-                .collect(Collectors.toList()));
+        findJobHistoyList.stream()
+                .map(jobHistory -> {
+                    Department department = departMentRepository.findById(jobHistory.getDepartmentId()).orElse(null);
+                    return new JobHistoryDto(jobHistory, department);
+                })
+                .forEach(historyEmployeeResponse::addJobHistoryDto);
 
         return historyEmployeeResponse;
     }
