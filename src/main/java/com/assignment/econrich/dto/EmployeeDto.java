@@ -1,8 +1,7 @@
 package com.assignment.econrich.dto;
 
 import com.assignment.econrich.domain.Employee;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -16,6 +15,8 @@ public class EmployeeDto {
     private final String last_name;
     private final String email;
     private final String phone_number;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private final LocalDateTime hire_date;
     private final String job_id;
     private final BigDecimal salary;

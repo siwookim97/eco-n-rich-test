@@ -6,13 +6,14 @@ import com.assignment.econrich.domain.Job;
 import com.assignment.econrich.dto.DepartmentDto;
 import com.assignment.econrich.dto.EmployeeDto;
 import com.assignment.econrich.dto.JobDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Schema(description = "사원 현재 정보 응답")
+@Schema(description = "사원 현재 정보 Response")
 @Getter
 public class CurrentEmployeeResponse {
 
@@ -22,6 +23,8 @@ public class CurrentEmployeeResponse {
     private final String last_name;
     private final String email;
     private final String phone_number;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private final LocalDateTime hire_date;
     private final JobDto job_info;
     private final BigDecimal salary;
